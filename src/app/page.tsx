@@ -1,103 +1,107 @@
-import Image from "next/image";
+'use client';
+
+import Link from 'next/link';
+import Image from 'next/image';
+import { Button } from "@/components/ui/button";
+import { Calendar, ShoppingCart, User } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="flex min-h-screen flex-col font-sans bg-white text-gray-900">
+      {/* ⬆️ Sticky top navigation */}
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4">
+          <Link href="/" className="text-2xl font-extrabold tracking-tight text-primary">
+            CaterVegas
+          </Link>
+          <nav className="flex gap-6 text-sm font-medium">
+            <Link href="/order" className="transition hover:text-primary">
+              Order
+            </Link>
+            <Link href="/schedule" className="transition hover:text-primary">
+              Schedule
+            </Link>
+            <Link href="/login" className="transition hover:text-primary">
+              Login
+            </Link>
+          </nav>
         </div>
+      </header>
+
+      {/* ⬇️ Hero section */}
+      <main className="flex-1">
+        <section className="relative isolate flex items-center justify-center overflow-hidden bg-[url('/bg-hero.jpg')] bg-cover bg-center">
+          {/* gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-secondary/80 mix-blend-multiply" />
+
+          <div className="container relative z-10 mx-auto py-24 text-center text-white">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-4 text-4xl font-extrabold sm:text-6xl"
+            >
+              Feeding Las&nbsp;Vegas one office at a time
+            </motion.h1>
+            <p className="mx-auto mb-8 max-w-xl text-lg">
+              Fast, reliable catering from the Strip’s favourite spots — delivered when you need it.
+            </p>
+
+            <Button asChild size="lg">
+              <Link href="/order">Start an order</Link>
+            </Button>
+          </div>
+        </section>
+
+        {/* ⬇️ Features */}
+        <section className="container mx-auto py-16">
+          <h2 className="mb-12 text-center text-3xl font-bold">Why CaterVegas?</h2>
+
+          <div className="grid gap-8 sm:grid-cols-3">
+            <Feature
+              icon={ShoppingCart}
+              title="Easy Ordering"
+              desc="Build, duplicate or recall orders in seconds."
+            />
+            <Feature
+              icon={Calendar}
+              title="Built‑in Scheduling"
+              desc="Plan weeks in advance with a calendar view of upcoming events."
+            />
+            <Feature
+              icon={User}
+              title="Seamless Account"
+              desc="One login handles invoices, dietary notes and favorites."
+            />
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* ⬇️ Footer */}
+      <footer className="border-t border-gray-200 bg-gray-50">
+        <div className="container mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
+          © {new Date().getFullYear()} CaterVegas. All rights reserved.
+        </div>
       </footer>
+    </div>
+  );
+}
+
+/* ---------------------------- */
+
+interface FeatureProps {
+  icon: React.FC<any>;
+  title: string;
+  desc: string;
+}
+
+function Feature({ icon: Icon, title, desc }: FeatureProps) {
+  return (
+    <div className="flex flex-col items-center gap-4 text-center">
+      <Icon className="h-10 w-10 text-primary" />
+      <h3 className="text-xl font-semibold">{title}</h3>
+      <p className="text-muted-foreground max-w-xs">{desc}</p>
     </div>
   );
 }
